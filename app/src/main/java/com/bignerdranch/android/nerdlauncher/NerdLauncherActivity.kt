@@ -20,6 +20,7 @@ class NerdLauncherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_nerd_launcher)
         recyclerView = findViewById(R.id.app_recycler_view)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
