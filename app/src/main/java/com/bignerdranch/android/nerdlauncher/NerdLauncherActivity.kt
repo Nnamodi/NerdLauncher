@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,13 +43,17 @@ class NerdLauncherActivity : AppCompatActivity() {
         recyclerView.adapter = ActivityAdapter(activities)
     }
 
-    private class ActivityHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    private class ActivityHolder(itemView: View)
+        : RecyclerView.ViewHolder(itemView), View.OnClickListener, SearchView.OnQueryTextListener {
         private lateinit var resolveInfo: ResolveInfo
         private val nameTextView: TextView = itemView.findViewById(R.id.app_name)
         private var appIcon: ImageView = itemView.findViewById(R.id.app_icon)
+        private var searchApp: SearchView = itemView.findViewById(R.id.search_apps)
         init {
             nameTextView.setOnClickListener(this)
             appIcon.setOnClickListener(this)
+            searchApp.setOnQueryTextListener(this)
+            searchApp.isSubmitButtonEnabled = true
         }
 
         fun bindActivity(resolveInfo: ResolveInfo) {
@@ -68,6 +73,25 @@ class NerdLauncherActivity : AppCompatActivity() {
             }
             val context = view.context
             context.startActivity(intent)
+        }
+
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            if (query != null) {
+                searchApps(query)
+            }
+            return true
+        }
+
+        override fun onQueryTextChange(query: String?): Boolean {
+            if (query != null) {
+                searchApps(query)
+            }
+            return true
+        }
+
+        private fun searchApps(query: String) {
+            val searchQuery = "%$query%"
+            // Still working
         }
     }
 

@@ -2,4 +2,5 @@
     <string name="app_name">NerdLauncher</string>
     <string name="app_icon">App icon</string>
     <string name="application_name">Nerd Launcher</string>
+    <string name="search_apps">Search apps</string>
 </resources>
